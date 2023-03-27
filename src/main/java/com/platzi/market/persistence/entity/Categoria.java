@@ -1,11 +1,16 @@
 package com.platzi.market.persistence.entity;
 
+//import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import javax.persistence.GenerationType;
+import java.util.List;
+
+
 @Entity
 @Table(name = "categorias")
 public class Categoria {
@@ -16,6 +21,20 @@ public class Categoria {
 
     private String descripcion;
     private Boolean estado;
+
+    /**
+     * mapea con el nombre del atributo que respalda esta one to many, que es el atributo categoria de la clase Categoria
+     * **/
+    @OneToMany(mappedBy = "categoria")
+    private List<Producto> productos;
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
 
     public Long getIdCategoria() {
         return idCategoria;
